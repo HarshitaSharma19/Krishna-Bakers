@@ -1,16 +1,60 @@
-# React + Vite
+# Krishna Bakers — Freshly Baked Happiness 🥐
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the **Krishna Bakers** web application! This project is a stunning, high-performance artisan bakery platform that showcases premium handcrafted desserts, cakes, and pastries. It features a modern, image-first aesthetic inspired by luxury patisseries, complete with smooth animations, dynamic "mood-based" product recommendations, and an interactive e-commerce shopping cart experience.
 
-Currently, two official plugins are available:
+## ✨ Features
+*   **Modern UI/UX:** Luxury, dynamic design with micro-animations and smooth scroll interactions.
+*   **Mood Detector:** Recommends baked goods based on the customer's current mood (e.g., Chocolate Lover, Fruity).
+*   **Interactive Shopping Cart:** Real-time cart state management with an animated slide-out drawer.
+*   **Performance Optimized:** Lazy loading for thumbnails, eager loading for hero images, ensuring ultra-fast initial paint.
+*   **File-Based Routing:** Seamless and intuitive navigation using TanStack Router.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Tech Stack
 
-## React Compiler
+This project was completely migrated to **JavaScript** and utilizes modern frontend tooling:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*   **Framework:** [React 19](https://react.dev/) (Vanilla JavaScript / JSX)
+*   **Build Tool:** [Vite](https://vitejs.dev/) - Lightning-fast development server and optimized production builds.
+*   **Routing:** [TanStack Router](https://tanstack.com/router) - Powerful, file-based routing.
+*   **Styling:** [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework for rapid UI development.
+*   **Animations:** [Framer Motion](https://www.framer.com/motion/) - Declarative animations for React.
+*   **Components:** [Radix UI](https://www.radix-ui.com/) & [Lucide React](https://lucide.dev/) - Accessible, headless UI primitives and beautiful iconography.
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Follow these steps to set up the project locally on your machine.
+
+### Prerequisites
+Make sure you have Node.js and npm installed on your machine.
+
+### Installation
+
+1. **Navigate to the project directory:**
+   ```bash
+   cd Krishna-Bakers
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+### Running the Development Server
+
+To start the application locally with hot-module replacement (HMR), run:
+
+```bash
+npm run dev
+```
+
+The application will start, and you can view it in your browser (typically at `http://localhost:5173`).
+
+### Building for Production
+
+To create an optimized production build, run:
+
+```bash
+npm run build
+```
+
+This will bundle all your JavaScript, CSS, and assets into the `dist` directory, ready to be deployed to your hosting provider.
