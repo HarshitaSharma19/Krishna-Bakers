@@ -6,6 +6,7 @@ import heroImg from "@/assets/hero-bakery.jpg";
 import { products, categories } from "@/lib/products";
 import { ProductCard } from "@/components/site/ProductCard";
 import { QuickView } from "@/components/site/QuickView";
+import { ChatBot } from "@/components/site/ChatBot";
 import { useCart } from "@/context/CartContext";
 import { useCurrency } from "@/context/CurrencyContext";
 import { toast } from "sonner";
@@ -33,6 +34,16 @@ const features = [
 { icon: Clock, title: "Baked Daily", text: "Out of the oven before sunrise, in your hands by noon." },
 { icon: Award, title: "Award Winning", text: "Voted Mumbai's best artisan bakery three years running." },
 { icon: Sparkles, title: "Made With Love", text: "Small-batch craftsmanship from a family that's baked since 1998." }];
+
+const journey = [
+{ year: "1998", emoji: "🏠", title: "A Kitchen Dream", desc: "Founder Krishnaji started baking traditional mithai and cakes in a tiny home kitchen in Dadar, Mumbai — gifting neighbours every festival." },
+{ year: "2003", emoji: "🛒", title: "First Storefront", desc: "Demand grew so fast that a small 200 sq ft shop opened on Linking Road. Customers queued daily for the famous butter croissant." },
+{ year: "2009", emoji: "🎂", title: "The Custom Cake Era", desc: "Krishna Bakers became the go-to for celebration cakes in Mumbai. Celebrity orders, wedding cakes, and a waitlist that stretched weeks." },
+{ year: "2014", emoji: "🏆", title: "Award-Winning Artisans", desc: "Voted \"Mumbai's Best Artisan Bakery\" at the Maharashtra Food Awards — a title we've held for three consecutive years." },
+{ year: "2019", emoji: "🌿", title: "Going Organic", desc: "Switched 100% to organic flour, European-grade butter, and single-origin chocolate. Quality over quantity, always." },
+{ year: "2024", emoji: "📱", title: "Digital Bakery", desc: "Launched online ordering, the Rewards Club, and same-day city-wide delivery. Over 5,000 orders delivered monthly." },
+{ year: "2026", emoji: "✨", title: "AI Cake Customizer", desc: "Introduced the world's first AI-powered cake builder — letting every customer become their own pastry chef from home." },
+];
 
 
 const moods = [
@@ -456,6 +467,48 @@ function Home() {
         </div>
       </section>
 
+      {/* JOURNEY TIMELINE */}
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-16">
+          <p className="text-xs font-semibold uppercase tracking-widest text-accent">Our Story</p>
+          <h2 className="mt-2 font-display text-3xl md:text-5xl text-primary text-balance">The journey of Krishna Bakers</h2>
+          <p className="mt-3 text-muted-foreground">From a home kitchen to Mumbai's most loved bakery — one bake at a time.</p>
+        </div>
+        <div className="relative">
+          {/* Vertical line */}
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent via-primary/30 to-transparent hidden md:block" />
+          <div className="space-y-12">
+            {journey.map((item, i) => (
+              <motion.div
+                key={item.year}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                className={`relative flex flex-col md:flex-row items-center gap-6 ${
+                  i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                }`}
+              >
+                {/* Content card */}
+                <div className="flex-1 rounded-3xl bg-card p-7 shadow-soft hover:shadow-elegant transition-all">
+                  <p className="text-xs font-bold uppercase tracking-widest text-accent mb-1">{item.year}</p>
+                  <h3 className="font-display text-xl text-primary">
+                    <span className="mr-2">{item.emoji}</span>{item.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
+                {/* Centre dot */}
+                <div className="hidden md:flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent to-primary text-white font-display text-sm font-semibold shadow-glow z-10">
+                  {item.year.slice(2)}
+                </div>
+                {/* Spacer */}
+                <div className="flex-1 hidden md:block" />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* NEWSLETTER */}
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-[2.5rem] bg-primary px-6 py-14 sm:px-12 sm:py-20">
@@ -488,6 +541,7 @@ function Home() {
       </section>
 
       <QuickView product={quick} onClose={() => setQuick(null)} />
+      <ChatBot />
     </>);
 
 }
