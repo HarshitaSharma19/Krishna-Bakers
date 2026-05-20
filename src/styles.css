@@ -1,0 +1,127 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-cream: var(--cream);
+  --color-brown: var(--brown);
+  --color-brown-deep: var(--brown-deep);
+  --color-orange-soft: var(--orange-soft);
+  --color-gold: var(--gold);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-elegant: var(--shadow-elegant);
+  --shadow-glow: var(--shadow-glow);
+}
+
+:root {
+  --radius: 1rem;
+
+  /* Soft Pastel Bakery Palette */
+  --cream: oklch(0.985 0.008 20);          /* #FFF8F5 soft cream */
+  --rose-bg: oklch(0.972 0.013 15);        /* #FFF1F2 */
+  --peach: oklch(0.945 0.025 40);          /* #FFE5D9 */
+  --pink-accent: oklch(0.74 0.13 15);      /* #FF8FA3 */
+  --brown: oklch(0.42 0.06 45);            /* #7B4F3A warm brown */
+  --brown-deep: oklch(0.30 0.05 35);       /* #4A2C2A */
+  --gold: oklch(0.86 0.10 75);
+
+  --background: var(--rose-bg);
+  --foreground: var(--brown-deep);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+
+  --primary: var(--brown);
+  --primary-foreground: oklch(0.985 0.012 75);
+
+  --secondary: var(--peach);
+  --secondary-foreground: var(--brown-deep);
+
+  --muted: oklch(0.96 0.015 25);
+  --muted-foreground: oklch(0.5 0.04 35);
+
+  --accent: var(--pink-accent);
+  --accent-foreground: oklch(1 0 0);
+
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  --border: oklch(0.92 0.015 20);
+  --input: oklch(0.94 0.015 20);
+  --ring: var(--pink-accent);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Poppins', 'Inter', system-ui, sans-serif;
+
+  --shadow-soft: 0 6px 24px -8px oklch(0.42 0.06 45 / 0.10);
+  --shadow-elegant: 0 18px 50px -14px oklch(0.42 0.06 45 / 0.18);
+  --shadow-glow: 0 0 60px -10px oklch(0.74 0.13 15 / 0.35);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3, h4, h5 { font-family: var(--font-display); letter-spacing: -0.01em; }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); }
+  .text-balance { text-wrap: balance; }
+  .bg-grain {
+    background-image: radial-gradient(oklch(0.42 0.09 50 / 0.04) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .gradient-warm {
+    background: linear-gradient(135deg, var(--rose-bg) 0%, var(--peach) 100%);
+  }
+  .gradient-hero-overlay {
+    background: linear-gradient(180deg, oklch(0.30 0.05 35 / 0.55) 0%, oklch(0.30 0.05 35 / 0.35) 50%, oklch(0.30 0.05 35 / 0.7) 100%);
+  }
+  .glass {
+    background: color-mix(in oklab, var(--card) 70%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
