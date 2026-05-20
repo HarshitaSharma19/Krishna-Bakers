@@ -4,12 +4,9 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  useLocation,
-  HeadContent,
-  Scripts } from
-"@tanstack/react-router";
+  useLocation
+} from "@tanstack/react-router";
 
-import appCss from "../styles.css?url";
 import { CartProvider } from "@/context/CartContext";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
@@ -29,13 +26,11 @@ function NotFoundComponent() {
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
-            
             Go home
           </Link>
         </div>
       </div>
     </div>);
-
 }
 
 function ErrorComponent({ error, reset }) {
@@ -58,73 +53,23 @@ function ErrorComponent({ error, reset }) {
               reset();
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90">
-            
             Try again
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent">
-            
             Go home
           </a>
         </div>
       </div>
     </div>);
-
 }
 
 export const Route = createRootRouteWithContext()({
-  head: () => ({
-    meta: [
-    { charSet: "utf-8" },
-    { name: "viewport", content: "width=device-width, initial-scale=1" },
-    { title: "Krishna Bakers — Freshly Baked Happiness" },
-    { name: "description", content: "Premium artisan bakery. Cakes, pastries, cookies, donuts and breads — freshly baked every day at Krishna Bakers." },
-    { name: "author", content: "Krishna Bakers" },
-    { property: "og:title", content: "Krishna Bakers — Freshly Baked Happiness" },
-    { property: "og:description", content: "Premium artisan bakery. Freshly baked cakes, pastries, cookies, donuts and breads." },
-    { property: "og:type", content: "website" },
-    { property: "og:image", content: "/favicon.svg" },
-    { name: "twitter:card", content: "summary_large_image" },
-    { name: "twitter:site", content: "@krishnabakers" }],
-
-    links: [
-    {
-      rel: "icon",
-      type: "image/svg+xml",
-      href: "/favicon.svg"
-    },
-    {
-      rel: "stylesheet",
-      href: appCss
-    },
-    { rel: "preconnect", href: "https://fonts.googleapis.com" },
-    { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-    {
-      rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
-    }]
-
-  }),
-  shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,
   errorComponent: ErrorComponent
 });
-
-function RootShell({ children }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>);
-
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
@@ -144,5 +89,4 @@ function RootComponent() {
         </div>
       </CartProvider>
     </QueryClientProvider>);
-
 }
