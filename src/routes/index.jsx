@@ -7,6 +7,7 @@ import { products, categories } from "@/lib/products";
 import { ProductCard } from "@/components/site/ProductCard";
 import { QuickView } from "@/components/site/QuickView";
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
@@ -44,6 +45,7 @@ const moods = [
 
 function HScroll({ items, onQuick }) {
   const { add } = useCart();
+  const { fmt } = useCurrency();
   return (
     <div className="-mx-4 sm:-mx-6 lg:-mx-8 overflow-x-auto pb-4 px-4 sm:px-6 lg:px-8 scroll-smooth snap-x snap-mandatory">
       <div className="flex gap-5 min-w-max">
@@ -75,7 +77,7 @@ function HScroll({ items, onQuick }) {
               </div>
               <h4 className="mt-1 font-display text-base leading-tight">{p.name}</h4>
               <div className="mt-2 flex items-center justify-between">
-                <span className="font-display text-lg font-semibold text-primary">${p.price.toFixed(2)}</span>
+                <span className="font-display text-lg font-semibold text-primary">{fmt(p.price)}</span>
                 <button onClick={() => add(p)} className="inline-flex items-center gap-1 rounded-full bg-secondary px-3 py-1.5 text-[11px] font-semibold text-primary hover:bg-accent hover:text-accent-foreground transition">
                   <Plus className="h-3 w-3" /> Add
                 </button>

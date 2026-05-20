@@ -3,9 +3,11 @@ import { motion } from "framer-motion";
 import { Star, Eye, Plus } from "lucide-react";
 
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 
 export function ProductCard({ product, onQuickView }) {
   const { add } = useCart();
+  const { fmt } = useCurrency();
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
@@ -47,7 +49,7 @@ export function ProductCard({ product, onQuickView }) {
         </Link>
         <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>
         <div className="mt-auto flex items-center justify-between pt-3">
-          <span className="font-display text-xl font-semibold text-primary">${product.price.toFixed(2)}</span>
+          <span className="font-display text-xl font-semibold text-primary">{fmt(product.price)}</span>
           <button
             onClick={() => add(product)}
             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground hover:bg-accent hover:text-accent-foreground transition-colors">

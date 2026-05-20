@@ -8,6 +8,7 @@ import {
 } from "@tanstack/react-router";
 
 import { CartProvider } from "@/context/CartContext";
+import { CurrencyProvider } from "@/context/CurrencyContext";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { CartDrawer } from "@/components/site/CartDrawer";
@@ -77,16 +78,18 @@ function RootComponent() {
   const isHome = pathname === "/";
   return (
     <QueryClientProvider client={queryClient}>
-      <CartProvider>
-        <div className="flex min-h-screen flex-col bg-background">
-          <Navbar />
-          <main className={`flex-1 ${isHome ? "" : "pt-20"}`}>
-            <Outlet />
-          </main>
-          <Footer />
-          <CartDrawer />
-          <Toaster />
-        </div>
-      </CartProvider>
+      <CurrencyProvider>
+        <CartProvider>
+          <div className="flex min-h-screen flex-col bg-background">
+            <Navbar />
+            <main className={`flex-1 ${isHome ? "" : "pt-20"}`}>
+              <Outlet />
+            </main>
+            <Footer />
+            <CartDrawer />
+            <Toaster />
+          </div>
+        </CartProvider>
+      </CurrencyProvider>
     </QueryClientProvider>);
 }

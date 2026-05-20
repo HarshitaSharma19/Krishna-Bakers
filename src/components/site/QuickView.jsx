@@ -2,10 +2,12 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 import { Star, ShoppingBag } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { Link } from "@tanstack/react-router";
 
 export function QuickView({ product, onClose }) {
   const { add } = useCart();
+  const { fmt } = useCurrency();
   return (
     <Dialog open={!!product} onOpenChange={(o) => !o && onClose()}>
       <DialogContent className="max-w-3xl overflow-hidden bg-background p-0 rounded-3xl">
@@ -23,7 +25,7 @@ export function QuickView({ product, onClose }) {
                 <span className="text-muted-foreground">· {product.popularity}+ orders</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">{product.description}</p>
-              <p className="font-display text-3xl font-semibold text-primary">${product.price.toFixed(2)}</p>
+              <p className="font-display text-3xl font-semibold text-primary">{fmt(product.price)}</p>
               <div className="mt-2 flex gap-2">
                 <button
                 onClick={() => {add(product);onClose();}}

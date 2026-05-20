@@ -5,6 +5,7 @@ import { Search, SlidersHorizontal, Star } from "lucide-react";
 import { products, categories } from "@/lib/products";
 import { ProductCard } from "@/components/site/ProductCard";
 import { QuickView } from "@/components/site/QuickView";
+import { useCurrency, USD_TO_INR } from "@/context/CurrencyContext";
 import { z } from "zod";
 
 const search = z.object({
@@ -30,14 +31,24 @@ export const Route = createFileRoute("/products")({
 function Listing() {
   const params = Route.useSearch();
   const navigate = useNavigate({ from: "/products" });
+  const { currency, fmt } = useCurrency();
   const [cat, setCat] = useState(params.category || "All");
   const [q, setQ] = useState(params.q || "");
-  const [price, setPrice] = useState(30);
+  const [price, setPrice] = useState(30); // always stored in USD
   const [minRating, setMinRating] = useState(0);
   const [sort, setSort] = useState("popular");
   const [quick, setQuick] = useState(null);
   const [loading, setLoading] = useState(true);
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  // Slider min/max in display currency
+  const sliderMin = currency === "INR" ? Math.round(3 * USD_TO_INR) : 3;
+  const sliderMax = currency === "INR" ? Math.round(30 * USD_TO_INR) : 30;
+  // Display value in current currency
+  const displayPrice = currency === "INR" ? Math.round(price * USD_TO_INR) : price;
+
+  // When currency changes, reset slider to max
+  useEffect(() => { setPrice(30); }, [currency]);
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 350);
@@ -82,8 +93,18 @@ function Listing() {
       </div>
       <div>
         <h3 className="font-display text-base text-primary mb-3">Max price</h3>
-        <input type="range" min={3} max={30} value={price} onChange={(e) => setPrice(+e.target.value)} className="w-full accent-[var(--accent)]" />
-        <p className="text-sm text-muted-foreground mt-1">Up to <span className="font-semibold text-primary">${price}</span></p>
+        <input
+          type="range"
+          min={sliderMin}
+          max={sliderMax}
+          value={displayPrice}
+          onChange={(e) => {
+            const v = +e.target.value;
+            // Convert back to USD for storage
+            setPrice(currency === "INR" ? v / USD_TO_INR : v);
+          }}
+          className="w-full accent-[var(--accent)]" />
+        <p className="text-sm text-muted-foreground mt-1">Up to <span className="font-semibold text-primary">{currency === "INR" ? `₹${displayPrice}` : `$${displayPrice}`}</span></p>
       </div>
       <div>
         <h3 className="font-display text-base text-primary mb-3">Min rating</h3>

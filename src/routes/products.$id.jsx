@@ -5,6 +5,7 @@ import { useState } from "react";
 import { getProduct, products } from "@/lib/products";
 import { ProductCard } from "@/components/site/ProductCard";
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { QuickView } from "@/components/site/QuickView";
 
 export const Route = createFileRoute("/products/$id")({
@@ -39,6 +40,7 @@ function PDP() {
   const { product } = Route.useLoaderData();
   const [qty, setQty] = useState(1);
   const { add, setOpen } = useCart();
+  const { fmt } = useCurrency();
   const [quick, setQuick] = useState(null);
 
   const recommended = products.filter((p) => p.id !== product.id && p.category === product.category).slice(0, 4);
@@ -85,8 +87,8 @@ function PDP() {
             <p className="mt-6 text-foreground/80 leading-relaxed">{product.description}</p>
 
             <div className="mt-7 flex items-baseline gap-3">
-              <span className="font-display text-4xl font-semibold text-primary">${product.price.toFixed(2)}</span>
-              <span className="text-sm text-muted-foreground line-through">${(product.price * 1.2).toFixed(2)}</span>
+              <span className="font-display text-4xl font-semibold text-primary">{fmt(product.price)}</span>
+              <span className="text-sm text-muted-foreground line-through">{fmt(product.price * 1.2)}</span>
               <span className="rounded-full bg-accent/15 px-2 py-0.5 text-xs font-semibold text-accent">Save 20%</span>
             </div>
 
@@ -112,7 +114,7 @@ function PDP() {
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">
               {[
-              { icon: Truck, label: "Free delivery", text: "Orders over $25" },
+              { icon: Truck, label: "Free delivery", text: "Orders over ₹2,000" },
               { icon: Clock, label: "Baked today", text: "Out by 6am" },
               { icon: ShieldCheck, label: "Fresh promise", text: "Or it's on us" }].
               map((b) =>
